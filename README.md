@@ -32,3 +32,7 @@ __commit 30e09a5b8ea57eacb234fdd5fb6c794081e979cc__
 `RandomForestClassifier()` has been run. `Hyperparameters` have been optimized using `RandomizedSearchCV()` over
 __`500`__ data fitting which took almost __`30 minutes`__ to complete. The **_best score_** over training dataset 
 was **_0.378_** (__very low__)
+
+
+__commit ad13f24b809a2aeed3730ea642c44182cb87ae99__
+By reducing `target labels` from 5 rating categories to 3 sentiment_category, **_best score_** is improved to **_0.627_**. Model is still RandomForest but parameters has been optimized using `GridSearchCS()`.
