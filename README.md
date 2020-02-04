@@ -36,3 +36,6 @@ was **_0.378_** (__very low__)
 
 __commit ad13f24b809a2aeed3730ea642c44182cb87ae99__
 By reducing `target labels` from 5 rating categories to 3 sentiment_category, **_best score_** is improved to **_0.627_**. Model is still RandomForest but parameters has been optimized using `GridSearchCS()`.
+
+__commit 1a3b43a5fca96e0d692df28162daa4144cce9ed5__  
+Various models trained and tested on `tfidf` features. The `accuracy_score` for all models is between __`60`__ and __`63%`__.
