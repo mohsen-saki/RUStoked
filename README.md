@@ -39,3 +39,7 @@ By reducing `target labels` from 5 rating categories to 3 sentiment_category, **
 
 __commit 1a3b43a5fca96e0d692df28162daa4144cce9ed5__  
 Various models trained and tested on `tfidf` features. The `accuracy_score` for all models is between __`60`__ and __`63%`__.
+
+
+__commit 2b5155164c7153e769130b4846873808dda517c1__
+Using `word2vec` model both trained on data and using `GloVe` pretrained model. Tested on `SVM`model (which had the best performance so far) but not much progress with `accuracy_score` about __`58%`__.
