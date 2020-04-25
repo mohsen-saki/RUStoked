@@ -1,0 +1,11 @@
+.ipynb_checkpoints/
+.venv/
+
+geckodriver.log
+notes.txt
+
+glove.6B.50d.txt
+glove.6B.zip
+
+
+
