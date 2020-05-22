@@ -1,5 +1,6 @@
 .ipynb_checkpoints/
 .venv/
+temp/
 
 geckodriver.log
 notes.txt
@@ -7,5 +8,5 @@ notes.txt
 glove.6B.50d.txt
 glove.6B.zip
 
-
+jupyter_requirements.txt
 
