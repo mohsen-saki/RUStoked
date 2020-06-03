@@ -4,8 +4,8 @@
 
 This project is a Sentiment Analysis (NLP) app driven by Machine Learning. The model is trained on a data set collected from employers’ review on  [SEEK](www.seek.com.au) This repo consists of:
 
-* Folder [`rustoked`]() which contains a library of core functions for the app
-* Folder [`notebooks`]() which contains some notebooks to demonstrate data and model engineering process
+* Folder [`rustoked`](https://github.com/mohsen-saki/RUStoked/tree/master/rustoked) which contains a library of core functions for the app
+* Folder [`notebooks`](https://github.com/mohsen-saki/RUStoked/tree/master/notebooks) which contains some notebooks to demonstrate data and model engineering process
 * Folder [`withdrawn`](https://github.com/mohsen-saki/RUStoked/tree/master/withdrawn) which contains my first try to develop the model,  successful though.
 
 ## Setup Environment
