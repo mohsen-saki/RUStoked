@@ -1,45 +1,27 @@
 # RUStoked
 
-## This is a NPL Machine Learning (Text Classification) Project
+**`Important note : This project is yet under development and all parts are not available.`**
 
-It has been conducted under Four discrete stages:
-1. [Data Collection & Web Scraping](https://github.com/mohsen-saki/RUStoked/tree/master/00_data_scraping)
-2. [Data Preparation](https://github.com/mohsen-saki/RUStoked/tree/master/01_data_preparation) (ongoing...)
-3. [Feature Engineering and Model Development](https://github.com/mohsen-saki/RUStoked/tree/master/02_model_development) (ongoing...)
-4. Deployment (Django App on docker Container) (yet to come...)
+This project is a Sentiment Analysis (NLP) app driven by Machine Learning. The model is trained on a data set collected from employers’ review on  [SEEK](www.seek.com.au) This repo consists of:
 
-#### Models to be Trained and Tested
-* Random Forest
-* Support Vector Machine
-* K Nearest Neighbors
-* Multinomial Naïve Bayes
-* Multinomial Logistic Regression
-* Gradient Boosting
+* Folder [`rustoked`]() which contains a library of core functions for the app
+* Folder [`notebooks`]() which contains some notebooks to demonstrate data and model engineering process
+* Folder [`withdrawn`](https://github.com/mohsen-saki/RUStoked/tree/master/withdrawn) which contains my first try to develop the model,  successful though.
 
+## Setup Environment
 
-### Dataset
-The data has been collected from [SEEK.COM.AU](https://www.seek.com.au/) using `python` web scraping tools; **`requests`**, 
-__`BeautifulSoup`__, and __`Selenium`__. The dataset includes about __4,000__ employees’ review for two large supermarkets
-in Australia: **_Woolworths_** & **_Coles_**.
+_Step 1 : Download repo on your machine_
 
-### Git Log History
-I would like to keep a diary of some specially picked `git-logs` with elaborated explanation (more specifically, of those 
-logged during _feature engineering and model development_). I believe it will shed some light on how the model has 
-developed, its problems, and solutions.
+`$ git clone https://github.com/mohsen-saki/RUStoked.git`
 
-__commit 30e09a5b8ea57eacb234fdd5fb6c794081e979cc__  
-`TFIDF` technique has been used to create data features. A `pipeline` of `TfidfVectorizer()` data transformation and 
-`RandomForestClassifier()` has been run. `Hyperparameters` have been optimized using `RandomizedSearchCV()` over
-__`500`__ data fitting which took almost __`30 minutes`__ to complete. The **_best score_** over training dataset 
-was **_0.378_** (__very low__)
+_Step 2 : Set up Environment_
 
+`$ cd RUStoked`
 
-__commit ad13f24b809a2aeed3730ea642c44182cb87ae99__
-By reducing `target labels` from 5 rating categories to 3 sentiment_category, **_best score_** is improved to **_0.627_**. Model is still RandomForest but parameters has been optimized using `GridSearchCS()`.
+`$ python3 -m venv <virtualenv>`
 
-__commit 1a3b43a5fca96e0d692df28162daa4144cce9ed5__  
-Various models trained and tested on `tfidf` features. The `accuracy_score` for all models is between __`60`__ and __`63%`__.
+`$ source <virtualenv>/bin/activate`
 
+_Step 3 : Install required packages_
 
-__commit 2b5155164c7153e769130b4846873808dda517c1__
-Using `word2vec` model both trained on data and using `GloVe` pretrained model. Tested on `SVM`model (which had the best performance so far) but not much progress with `accuracy_score` about __`58%`__.
+`$ pip install -r requirements.txt`
