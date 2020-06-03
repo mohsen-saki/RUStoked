@@ -3,6 +3,9 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 from tqdm import tqdm
 import csv
+import sys
+sys.path.append("..")
+from pathlib import Path
 
 
 # HTML attributes used to scrape review links
@@ -89,7 +92,7 @@ def fetch_review_link(reviews_url):
 
 
 
-def fetch_reviews(all_links):
+def fetch_reviews(all_links, company_name):
     """
     collect reviews text and other data related to them
     :all_links: a list of all urls ecah linked to a review
@@ -111,7 +114,8 @@ def fetch_reviews(all_links):
         "management_rating": [],
         "benefits_rating": [],
         "diversity_rating": [],
-        "overall_rating": []
+        "overall_rating": [],
+        "company": []
     }
 
     review_number = 0
@@ -164,34 +168,37 @@ def fetch_reviews(all_links):
                 soup.find('div', {'data-automation': RATING_SELECTOR_DIVERSITY}).find('span', {'class': RATING_SELECTOR}).text)
             columns['overall_rating'].append(
                 soup.find('div', {'data-automation': RATING_SELECTOR_OVERALL}).find('span', {'class': RATING_SELECTOR}).text)
+            columns['company'].append(company_name)
             
 
     driver.close()
     return columns, review_number, review_missed
 
 
-def save_links(all_links, company_name):
+def save_links(all_links, company_name, save_path=None):
     """
     save all links into text file
     :all_links: list of all the reviews' link collected
     :company_name: nameof targeted company    
+    :save_path: path to saving location
     """
     print("Writing links into a text file named {}.txt ...".format(company_name))
-    with open('{}.txt'.format(company_name), 'w') as file:
+    with open(Path('{}/{}.txt'.format(save_path, company_name)), 'w') as file:
         for url in tqdm(all_links):
             file.write('{}\n'.format(url))
         print("\n")
 
 
-def save_reviews(columns, company_name):
+def save_reviews(columns, company_name, save_path=None):
     """
     save collected data in a csv file
     :columns: dictionary containing all data collected
     :company_name: name of company targeted for data collection
+    :save_path: path to saving location
     """
 
     print("\nWritting data into a CSV file named {}.csv ...\n".format(company_name))
-    with open ('{}.csv'.format(company_name), 'w', newline='') as csvfile:
+    with open (Path('{}/{}.csv'.format(save_path ,company_name)), 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(columns.keys())
         writer.writerows(zip(*columns.values()))

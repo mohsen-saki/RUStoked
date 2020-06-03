@@ -28,16 +28,16 @@ if total_pages == 1 and len(all_links) == 0:
 
 
 if all_links:
-    save_links(all_links, company_name)
+    save_links(all_links, company_name, save_path='scraped_data')
 
 print("fetching reviews ...")
 
-columns, review_number, review_missed = fetch_reviews(all_links)
+columns, review_number, review_missed = fetch_reviews(all_links, company_name)
 
 print("\n{} reviews have been collected.".format(review_number))
 print("{} reviews have been missed.\n".format(review_missed))
 
 if columns:
-    save_reviews(columns, company_name)
+    save_reviews(columns, company_name, save_path='scraped_data')
 
 print("Done!")
