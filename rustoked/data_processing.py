@@ -47,5 +47,36 @@ def clean_raw_dataframe(df, drop_columns=False):
     df['recommendation'] = df['recommendation'].str.split().str[-1]
     df['salary'] = df['salary'].str.split().str[-1]
 
+    # new column for overal rating calculated based on employee ratings
+    df["calculated_rating"] = df[["career_opportunity_rating", "work_life_balance_rating",
+                              "work_env_rating", "management_rating", "benefits_rating",
+                              "diversity_rating"]].mean(axis=1).round()
+
+    # removing those reviews with two points difference between overall and calculated rating
+    df = df[~(abs(df['overall_rating'] - df['calculated_rating']) > 1)]
+
+    # mapping ratings to three different category labels
+    df["labels"] = [get_labels(rating) for rating in df["overall_rating"]]
+
+    # Adding review text length as a new feature
+    df["review_len"] = df["reviews"].str.len()
+
     if drop_columns:
-        df.drop([], axis=1, inplace=True)
+        df.drop(drop_columns, axis=1, inplace=True)
+
+    return df
+
+
+
+def get_labels(rating):
+    """
+    map each reating to a label category used by clean_raw_dataframe() function
+    :rating: overal rating given by employee
+    "return: data labels
+    """
+    if rating in [1, 2]:
+        return 0
+    elif rating == 3:
+        return 1
+    else:
+        return 2
