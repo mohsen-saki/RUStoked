@@ -25,3 +25,4 @@ _Step 2 : Set up Environment_
 _Step 3 : Install required packages_
 
 `$ pip install -r requirements.txt`
+`$ python -m spacy download en_core_web_lg`
