@@ -3,6 +3,7 @@ from pathlib import Path
 import sys
 sys.path.append("..")
 import pandas as pd
+import numpy as np
 
 def load_raw_data(save_path=None):
     """
@@ -80,3 +81,60 @@ def get_labels(rating):
         return 1
     else:
         return 2
+
+
+def get_normalized_series(df, col):
+    """
+    get a normalized version of selcted column/series
+    :param df: pandas dataframe
+    :param col: column name
+    :return: normalized series using Z-score
+    """
+    return (df[col] - df[col].mean()) / df[col].std()
+
+
+def get_features(df):
+    """
+    get the features for model development
+    :param df: pandas dataframe
+    :return: dataframe updated with features
+    """
+    # creat a new column with review length normalized
+    df["norm_review_len"] = get_normalized_series(df, "review_len")
+
+    # creating new columns each containing if targeted word is in the review or not
+    df["has_positive"] = (
+        df["reviews"].str.lower().str.contains("great", regex=False) |
+        df["reviews"].str.lower().str.contains("good", regex=False)
+    )
+
+    df["has_but"] = df["reviews"].str.lower().str.contains("but", regex=False)
+
+    df["has_negative"] = (
+        df["reviews"].str.lower().str.contains("bad", regex=False) |
+        df["reviews"].str.lower().str.contains("poor", regex=False) |
+        df["reviews"].str.lower().str.contains("not", regex=False) |
+        df["reviews"].str.lower().str.contains("no", regex=False) |
+        df["reviews"].str.lower().str.contains("n't", regex=False)
+    )
+
+    # creating new columns each containing number of occurrences for each targeted 
+    # word is in the review and total sum of all as a weight factor.
+    df["great_count"] = df["reviews"].str.lower().str.count("great")
+    df["good_count"] = df["reviews"].str.lower().str.count("good")
+
+    df["bad_count"] = -df["reviews"].str.lower().str.count("bad")
+    df["poor_count"] = -df["reviews"].str.lower().str.count("poor")
+    df["not_count"] = -df["reviews"].str.lower().str.count("not")
+    df["no_count"] = -df["reviews"].str.lower().str.count("no")
+    df["n't_count"] = -df["reviews"].str.lower().str.count("n't")
+
+    # total sum based on their content tendency as positive(+) or negative(-)
+    df["pos_neg_factor"] = df[["great_count", "good_count", 
+                                        "bad_count", "poor_count", "not_count", 
+                                        "no_count", "n't_count"]].sum(axis=1)
+
+    # get the normalized weight factor
+    df["norm_factor"] = get_normalized_series(df, "pos_neg_factor")
+
+    return df
