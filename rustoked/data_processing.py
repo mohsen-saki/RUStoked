@@ -4,6 +4,7 @@ import sys
 sys.path.append("..")
 import pandas as pd
 import numpy as np
+import string
 
 def load_raw_data(save_path=None):
     """
@@ -59,9 +60,6 @@ def clean_raw_dataframe(df, drop_columns=False):
     # mapping ratings to three different category labels
     df["labels"] = [get_labels(rating) for rating in df["overall_rating"]]
 
-    # Adding review text length as a new feature
-    df["review_len"] = df["reviews"].str.len()
-
     if drop_columns:
         df.drop(drop_columns, axis=1, inplace=True)
 
@@ -99,6 +97,8 @@ def get_features(df):
     :param df: pandas dataframe
     :return: dataframe updated with features
     """
+    # Adding review text length as a new feature
+    df["review_len"] = df["reviews"].str.len()
     # creat a new column with review length normalized
     df["norm_review_len"] = get_normalized_series(df, "review_len")
 
@@ -137,4 +137,32 @@ def get_features(df):
     # get the normalized weight factor
     df["norm_factor"] = get_normalized_series(df, "pos_neg_factor")
 
+    return df
+
+
+def get_punct_removed(text):
+    """
+    to remove special characters and punctuations from a string
+    :param text: a string instance
+    :return: cleaned text
+    """
+    
+    # see https://docs.python.org/3/library/stdtypes.html#str.maketrans
+    # Thanks to: https://machinelearningmastery.com/clean-text-machine-learning-python/
+    transtable = str.maketrans('', '', string.punctuation+'‘’')
+    words = text.split()
+    stripped_text = " ".join([word.translate(transtable) for word in words])
+    
+    return stripped_text
+
+def get_clean_text(df):
+    """
+    turn reviews to lowercase and remove punctuations
+    :param df: dataframe instance
+    :return: cleaned dataframe
+    """
+    
+    df['reviews'] = df['reviews'].str.lower()
+    df['reviews'] = df['reviews'].apply(lambda x: get_punct_removed(x))
+    
     return df

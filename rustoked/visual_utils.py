@@ -55,7 +55,7 @@ def get_interactive_vec_plot(visual_df):
         'y', 
         source=datasource, 
         color=dict(field="labels", transform=colour_mapper), 
-        legend="legend"
+        legend="labels"
     )
 
     return plot
