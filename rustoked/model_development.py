@@ -37,7 +37,7 @@ def get_vectors_list(text_series, vectorizer):
     return vectors_list
 
 
-def get_feature_and_label(df, feature_cols=None):
+def get_features_and_labels(df, feature_cols=None):
     """
     generate and return both sets of features and labels
     required for classifier model training and predictions
@@ -103,7 +103,7 @@ def get_feature_importance(vectorizer, classifier, feature_cols=None, num=20):
     else:
         feature_names.extend(feature_cols)
         feature_names = np.array(feature_names)
-    feature_importances = clf.feature_importances_
+    feature_importances = classifier.feature_importances_
     indices = np.argsort(feature_importances)[::-1]
     all_features = list(zip(feature_names[indices], feature_importances[indices]))
         

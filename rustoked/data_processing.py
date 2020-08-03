@@ -6,6 +6,13 @@ import pandas as pd
 import numpy as np
 import string
 
+import nltk
+from nltk.tokenize import RegexpTokenizer
+from nltk.corpus import stopwords
+nltk.download('stopwords')
+from nltk.stem import WordNetLemmatizer 
+nltk.download('wordnet')
+
 def load_raw_data(save_path=None):
     """
     read multiple csv files and concat as a dataframe
@@ -157,12 +164,18 @@ def get_punct_removed(text):
 
 def get_clean_text(df):
     """
-    turn reviews to lowercase and remove punctuations
+    turn reviews to lowercase and remove punctuations, stopwords, lemmatize
     :param df: dataframe instance
     :return: cleaned dataframe
     """
     
-    df['reviews'] = df['reviews'].str.lower()
-    df['reviews'] = df['reviews'].apply(lambda x: get_punct_removed(x))
+    tokenizer = RegexpTokenizer(r'\w+')
+    lemmatizer = WordNetLemmatizer()
+
+    df['cleantxt'] = df['reviews'].str.lower()
+    df['cleantxt'] = df['cleantxt'].apply(lambda x: get_punct_removed(x))
+    df["cleantxt"] = df["cleantxt"].apply(lambda x: tokenizer.tokenize(x))
+    df["cleantxt"] = df["cleantxt"].apply(lambda x: [word for word in x if word not in stopwords.words('english')])
+    df["cleantxt"] = df["cleantxt"].apply(lambda x: " ".join([lemmatizer.lemmatize(word) for word in x]))
     
     return df
