@@ -1,3 +1,8 @@
+"""
+Serving as single page web app
+powered by streamlit
+"""
+
 import os
 from pathlib import Path
 import sys
@@ -10,6 +15,7 @@ from PIL import Image
 
 from rustoked import get_prediction
 
+# make sure addresses are relatively set up
 curr_location = Path(os.path.dirname(__file__))
 icon_location = Path("photos/BreakTime.png")
 foot_location = Path("photos/foot.png")
@@ -22,6 +28,7 @@ st.markdown("Write or paste some text (opinion) here an I tell you the content s
 
 comment = st.text_area("What do you reckon? ...")
 
+# this part does the job. take input text and return the sentiment prediction
 if st.button("Do Tell"):
     if comment:
         st.markdown("**`{}`**".format(get_prediction(comment)))
@@ -48,6 +55,6 @@ st.markdown("More about the project [here]()")
 st.markdown("Source code on [GitHub](https://github.com/mohsen-saki/RUStoked)")
 
 st.write("----------")
-st.write("Thanks to ...")
+st.write("Thanks to open source and free world ...")
 foot = Image.open(curr_location / foot_location)
 st.image(foot)
