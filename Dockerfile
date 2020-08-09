@@ -1,4 +1,4 @@
-FROM python:3.8
+FROM python:3.8.0-slim
 MAINTAINER saki.mohsen@gmail.com
 # EXPOSE: PORT does not work on heroku
 EXPOSE 8501
