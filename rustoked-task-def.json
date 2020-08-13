@@ -1,11 +1,18 @@
 {
   "ipcMode": null,
-  "executionRoleArn": "arn:aws:iam::739382146511:role/ecs_access",
+  "executionRoleArn": "arn:aws:iam::739382146511:role/ecsTaskExecutionRole",
   "containerDefinitions": [
     {
       "dnsSearchDomains": null,
       "environmentFiles": null,
-      "logConfiguration": null,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "secretOptions": null,
+        "options": {
+          "awslogs-group": "rustoked-lg",
+          "awslogs-region": "ap-southeast-2"
+        }
+      },
       "entryPoint": null,
       "portMappings": [
         {
@@ -43,9 +50,7 @@
       "pseudoTerminal": null,
       "user": null,
       "readonlyRootFilesystem": null,
-      "dockerLabels": {
-        "app_name": "rustoked"
-      },
+      "dockerLabels": null,
       "systemControls": null,
       "privileged": null,
       "name": "rustoked-dkr-cnt"
@@ -57,14 +62,32 @@
   "compatibilities": [
     "EC2"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:739382146511:task-definition/rustoked-task-def:14",
+  "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:739382146511:task-definition/rustoked-task-def:18",
   "family": "rustoked-task-def",
   "requiresAttributes": [
     {
       "targetId": null,
       "targetType": null,
       "value": null,
+      "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "ecs.capability.execution-role-awslogs"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
       "name": "com.amazonaws.ecs.capability.ecr-auth"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
     },
     {
       "targetId": null,
@@ -83,12 +106,6 @@
       "targetType": null,
       "value": null,
       "name": "ecs.capability.execution-role-ecr-pull"
-    },
-    {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
-      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
     }
   ],
   "pidMode": null,
@@ -97,7 +114,7 @@
   ],
   "networkMode": null,
   "cpu": "128",
-  "revision": 14,
+  "revision": 18,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
