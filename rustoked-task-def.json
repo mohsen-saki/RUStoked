@@ -1,23 +1,15 @@
 {
   "ipcMode": null,
-  "executionRoleArn": "arn:aws:iam::739382146511:role/ecsTaskExecutionRole",
+  "executionRoleArn": "arn:aws:iam::739382146511:role/ecs_access",
   "containerDefinitions": [
     {
       "dnsSearchDomains": null,
       "environmentFiles": null,
-      "logConfiguration": {
-        "logDriver": "awslogs",
-        "secretOptions": null,
-        "options": {
-          "awslogs-group": "/ecs/rustoked-task-def",
-          "awslogs-region": "ap-southeast-2",
-          "awslogs-stream-prefix": "ecs"
-        }
-      },
+      "logConfiguration": null,
       "entryPoint": null,
       "portMappings": [
         {
-          "hostPort": 8501,
+          "hostPort": 80,
           "protocol": "tcp",
           "containerPort": 8501
         }
@@ -34,10 +26,10 @@
       "secrets": null,
       "dockerSecurityOptions": null,
       "memory": null,
-      "memoryReservation": 512,
+      "memoryReservation": 256,
       "volumesFrom": [],
       "stopTimeout": null,
-      "image": "739382146511.dkr.ecr.ap-southeast-2.amazonaws.com/rustoked-dkr-repo",
+      "image": "739382146511.dkr.ecr.ap-southeast-2.amazonaws.com/rustoked-dkr-repo:latest",
       "startTimeout": null,
       "firelensConfiguration": null,
       "dependsOn": null,
@@ -51,45 +43,28 @@
       "pseudoTerminal": null,
       "user": null,
       "readonlyRootFilesystem": null,
-      "dockerLabels": null,
+      "dockerLabels": {
+        "app_name": "rustoked"
+      },
       "systemControls": null,
       "privileged": null,
       "name": "rustoked-dkr-cnt"
     }
   ],
   "placementConstraints": [],
-  "memory": "512",
+  "memory": "256",
   "taskRoleArn": "arn:aws:iam::739382146511:role/ecs_access",
   "compatibilities": [
-    "EC2",
-    "FARGATE"
+    "EC2"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:739382146511:task-definition/rustoked-task-def:latest",
+  "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:739382146511:task-definition/rustoked-task-def:14",
   "family": "rustoked-task-def",
   "requiresAttributes": [
     {
       "targetId": null,
       "targetType": null,
       "value": null,
-      "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
-    },
-    {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
-      "name": "ecs.capability.execution-role-awslogs"
-    },
-    {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
       "name": "com.amazonaws.ecs.capability.ecr-auth"
-    },
-    {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
-      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
     },
     {
       "targetId": null,
@@ -114,21 +89,15 @@
       "targetType": null,
       "value": null,
       "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
-    },
-    {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
-      "name": "ecs.capability.task-eni"
     }
   ],
   "pidMode": null,
   "requiresCompatibilities": [
-    "FARGATE"
+    "EC2"
   ],
-  "networkMode": "awsvpc",
-  "cpu": "256",
-  "revision": 12,
+  "networkMode": null,
+  "cpu": "128",
+  "revision": 14,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
