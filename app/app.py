@@ -37,7 +37,7 @@ if st.button("Do Tell"):
 
 st.write("----------")
 
-st.markdown("""This is an experimental **NLP** (_Sentiment Detection_) project. The 
+st.markdown("""This is an experimental **NLP** (_Sentiment Analysis_) project. The 
             model has been trained on a series of text data collected 
             from [SEEK](https://www.seek.com.au/) by which employees expressed their 
             opinion about employers and companies they have worked for. I focused on detecting a 

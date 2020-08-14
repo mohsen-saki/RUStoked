@@ -8,5 +8,5 @@ COPY models usr/src/models
 WORKDIR /usr/src
 RUN pip3 install -r requirements.txt
 # $PORT is an environment variable provided by heroku
-# Uncomment tail part of below command for heroku deployment 
-CMD streamlit run app/app.py #--server.port $PORT
+# Uncomment/Comment --option  part of below command for HEROKU/AWS deployment 
+CMD streamlit run app/app.py --server.port $PORT
