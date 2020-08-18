@@ -36,7 +36,7 @@
       "memoryReservation": 256,
       "volumesFrom": [],
       "stopTimeout": null,
-      "image": "739382146511.dkr.ecr.ap-southeast-2.amazonaws.com/rustoked-dkr-repo:latest",
+      "image": "739382146511.dkr.ecr.ap-southeast-2.amazonaws.com/rustoked-dkr-repo:b30e346f68d9ec45123ed7e963bead9b2a6443b4",
       "startTimeout": null,
       "firelensConfiguration": null,
       "dependsOn": null,
@@ -62,7 +62,7 @@
   "compatibilities": [
     "EC2"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:739382146511:task-definition/rustoked-task-def:18",
+  "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:739382146511:task-definition/rustoked-task-def:28",
   "family": "rustoked-task-def",
   "requiresAttributes": [
     {
@@ -114,7 +114,7 @@
   ],
   "networkMode": null,
   "cpu": "128",
-  "revision": 18,
+  "revision": 28,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
