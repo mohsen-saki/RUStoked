@@ -9,4 +9,4 @@ WORKDIR /usr/src
 RUN pip3 install -r requirements.txt
 # $PORT is an environment variable provided by heroku
 # Uncomment/Comment --option  part of below command for HEROKU/AWS deployment 
-CMD streamlit run app/app.py #--server.port $PORT
+CMD streamlit run app/app.py --server.port $PORT
