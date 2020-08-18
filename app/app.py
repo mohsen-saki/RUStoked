@@ -17,11 +17,11 @@ from rustoked import get_prediction
 
 # make sure addresses are relatively set up
 curr_location = Path(os.path.dirname(__file__))
-icon_location = Path("photos/BreakTime.png")
+icon_location = Path("photos/icon.png")
 foot_location = Path("photos/foot.png")
 
 icon = Image.open(curr_location / icon_location)
-st.image(icon)
+st.image(icon, use_column_width=False)
 
 st.title("R.U.Stoked?")
 st.markdown("Write or paste some text (opinion) here an I tell you the content sentiment.")
@@ -56,4 +56,4 @@ st.markdown("More about the project & Source code on [GitHub](https://github.com
 st.write("----------")
 st.write("Thanks to open source and free world ...")
 foot = Image.open(curr_location / foot_location)
-st.image(foot)
+st.image(foot, use_column_width=True)
