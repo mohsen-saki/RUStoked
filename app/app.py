@@ -51,8 +51,7 @@ st.markdown("""**NOTE** : _This is an under development project and the currentl
 st.write("----------")
 
 st.markdown("Made by [Mohsen Saki](https://www.linkedin.com/in/mohsen-saki)")
-st.markdown("More about the project [here]()")
-st.markdown("Source code on [GitHub](https://github.com/mohsen-saki/RUStoked)")
+st.markdown("More about the project & Source code on [GitHub](https://github.com/mohsen-saki/RUStoked)")
 
 st.write("----------")
 st.write("Thanks to open source and free world ...")
