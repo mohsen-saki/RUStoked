@@ -63,7 +63,7 @@ six==1.15.0
 soupsieve==2.0
 spacy==2.2.4
 srsly==1.0.2
-streamlit==0.64.0
+streamlit==1.11.1
 tbb==2020.0.133
 thinc==7.4.0
 threadpoolctl==2.1.0
